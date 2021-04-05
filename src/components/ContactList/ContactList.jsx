@@ -1,14 +1,12 @@
 import ProtoType from "prop-types";
 
-const ContactList = () => {
-  return (
-    <ul>
-      <h2>Contacts</h2>
-      <li>
-        <button>Delete</button>
-      </li>
-    </ul>
-  );
-};
+const ContactList = ({ contacts }) => (
+  <ul>
+    <h2>Contacts</h2>
+    {/* {contacts.map((contact) => (
+      <li key={contact.id}>{contact.name + contact.number}</li>
+    ))} */}
+  </ul>
+);
 
 export default ContactList;
