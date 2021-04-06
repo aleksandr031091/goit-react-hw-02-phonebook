@@ -1,5 +1,5 @@
 import { Component } from "react";
-import shortid from "shortid";
+// import shortid from "shortid";
 
 import ContactForm from "./ContactForm";
 import ContactList from "./ContactList";
@@ -14,22 +14,34 @@ class App extends Component {
       { id: "id-4", name: "Annie Copeland", number: "227-91-26" },
     ],
     filter: "",
+    name: "",
+    number: "",
   };
 
-  addContacts = (name, number) => {
+  addContact = ({ name, number }) => {
     const contact = {
-      id: shortid.generate(),
+      // id: shortid.generate(),
       name,
       number,
     };
 
-    this.setState((prevState) => ({
-      contacts: [...prevState.contacts, contact],
-    }));
-  };
+    const { contacts } = this.state;
 
-  changeFilter = (filter) => {
-    this.setState({ filter });
+    if (
+      contacts.find(
+        (contact) => contact.name.toLowerCase() === name.toLowerCase()
+      )
+    ) {
+      alert(`${name} is already in contacts.`);
+    } else if (contacts.find((contact) => contact.number === number)) {
+      alert(`${number} is already in contacts.`);
+    } else if (name.trim() === "" || number.trim() === "") {
+      alert("please add name and phone number");
+    } else {
+      this.setState(({ contacts }) => ({
+        contacts: [contact, ...contacts],
+      }));
+    }
   };
 
   getVisibleContacts = () => {
@@ -38,6 +50,10 @@ class App extends Component {
     return contacts.filter((contacts) =>
       contacts.name.toLowerCase().includes(filter.toLowerCase())
     );
+  };
+
+  changeFilter = (filter) => {
+    this.setState({ filter });
   };
 
   removeContact = (contactId) => {
@@ -57,7 +73,7 @@ class App extends Component {
       <div>
         <h1>Phonebook</h1>
 
-        <ContactForm onAddContact={this.addContact} />
+        <ContactForm onSubmit={this.addContact} />
         <h2>Contacts</h2>
         {visibleContacts.length > 1 && (
           <Filter value={filter} onChangeFilter={this.changeFilter} />

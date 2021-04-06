@@ -1,5 +1,5 @@
 import { Component } from "react";
-import ProtoType from "prop-types";
+import PropTypes from "prop-types";
 
 class ContactForm extends Component {
   state = {
@@ -18,20 +18,20 @@ class ContactForm extends Component {
   handleSubmit = (event) => {
     event.preventDefault();
 
-    this.props.onAddContact({ ...this.state });
+    this.props.onSubmit({ ...this.state });
     this.setState({ name: "", number: "" });
   };
 
   render() {
     return (
-      <form>
+      <form onSubmit={this.handleSubmit}>
         <label>
           <input
             type="text"
             name="name"
             value={this.state.name}
             onChange={this.handleChange}
-            // pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
+            pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
             title="Имя может состоять только из букв, апострофа, тире и пробелов. Например Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan и т. п."
             required
           />
@@ -44,7 +44,7 @@ class ContactForm extends Component {
             name="number"
             value={this.state.number}
             onChange={this.handleChange}
-            // pattern="(\+?( |-|\.)?\d{1,2}( |-|\.)?)?(\(?\d{3}\)?|\d{3})( |-|\.)?(\d{3}( |-|\.)?\d{4})"
+            pattern="(\+?( |-|\.)?\d{1,2}( |-|\.)?)?(\(?\d{3}\)?|\d{3})( |-|\.)?(\d{3}( |-|\.)?\d{4})"
             title="Номер телефона должен состоять из 11-12 цифр и может содержать цифры, пробелы, тире, пузатые скобки и может начинаться с +"
             required
           />
@@ -58,8 +58,6 @@ class ContactForm extends Component {
 }
 export default ContactForm;
 
-// ContactForm.prototype = {
-//   onAddContact: ProtoType.func.isRequired,
-//   name: ProtoType.string.isRequired,
-//   number: ProtoType.number.isRequired,
-// };
+ContactForm.propTypes = {
+  onSubmit: PropTypes.func.isRequired,
+};

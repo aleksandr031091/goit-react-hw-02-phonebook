@@ -1,4 +1,4 @@
-import ProtoType from "prop-types";
+import PropTypes from "prop-types";
 
 const ContactList = ({ contacts, onRemoveContact }) => (
   <ul>
@@ -20,3 +20,14 @@ const ContactList = ({ contacts, onRemoveContact }) => (
 );
 
 export default ContactList;
+
+ContactList.propTypes = {
+  onRemoveContact: PropTypes.func.isRequired,
+  contacts: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      number: PropTypes.string.isRequired,
+    })
+  ),
+};
