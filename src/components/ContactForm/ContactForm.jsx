@@ -1,7 +1,7 @@
 import { Component } from "react";
 import ProtoType from "prop-types";
 
-export default class ContactForm extends Component {
+class ContactForm extends Component {
   state = {
     name: "",
     number: "",
@@ -17,8 +17,8 @@ export default class ContactForm extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
-    const { name, number } = this.state;
-    this.props.onAddContact({ name, number });
+
+    this.props.onAddContact({ ...this.state });
     this.setState({ name: "", number: "" });
   };
 
@@ -56,3 +56,10 @@ export default class ContactForm extends Component {
     );
   }
 }
+export default ContactForm;
+
+// ContactForm.prototype = {
+//   onAddContact: ProtoType.func.isRequired,
+//   name: ProtoType.string.isRequired,
+//   number: ProtoType.number.isRequired,
+// };
