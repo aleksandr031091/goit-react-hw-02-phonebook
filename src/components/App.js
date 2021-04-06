@@ -5,6 +5,9 @@ import ContactForm from "./ContactForm";
 import ContactList from "./ContactList";
 import Filter from "./Filter";
 
+import Section from "./Section";
+import Container from "./Container";
+
 class App extends Component {
   state = {
     contacts: [
@@ -14,8 +17,6 @@ class App extends Component {
       { id: "id-4", name: "Annie Copeland", number: "227-91-26" },
     ],
     filter: "",
-    name: "",
-    number: "",
   };
 
   addContact = ({ name, number }) => {
@@ -70,22 +71,27 @@ class App extends Component {
     const visibleContacts = this.getVisibleContacts();
 
     return (
-      <div>
-        <h1>Phonebook</h1>
+      <>
+        <Section title="Phonebook">
+          <Container>
+            <ContactForm onSubmit={this.addContact} />
 
-        <ContactForm onSubmit={this.addContact} />
-        <h2>Contacts</h2>
-        {visibleContacts.length > 1 && (
-          <Filter value={filter} onChangeFilter={this.changeFilter} />
-        )}
-        {visibleContacts.length > 0 && (
-          <ContactList
-            contacts={visibleContacts}
-            onRemoveContact={this.removeContact}
-          />
-        )}
-      </div>
+            {visibleContacts.length > 1 && (
+              <Filter value={filter} onChangeFilter={this.changeFilter} />
+            )}
+          </Container>
+          {visibleContacts.length > 0 && (
+            <Container title="Contacts">
+              <ContactList
+                contacts={visibleContacts}
+                onRemoveContact={this.removeContact}
+              />
+            </Container>
+          )}
+        </Section>
+      </>
     );
   }
 }
+
 export default App;

@@ -1,5 +1,6 @@
 import { Component } from "react";
 import PropTypes from "prop-types";
+import scss from "./ContactForm.module.scss";
 
 class ContactForm extends Component {
   state = {
@@ -24,8 +25,9 @@ class ContactForm extends Component {
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
-        <label>
+      <form onSubmit={this.handleSubmit} className={scss.form}>
+        <label className={scss.label}>
+          Name
           <input
             type="text"
             name="name"
@@ -35,10 +37,10 @@ class ContactForm extends Component {
             title="Имя может состоять только из букв, апострофа, тире и пробелов. Например Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan и т. п."
             required
           />
-          Name
         </label>
 
-        <label>
+        <label className={scss.label}>
+          Number
           <input
             type="tel"
             name="number"
@@ -48,7 +50,6 @@ class ContactForm extends Component {
             title="Номер телефона должен состоять из 11-12 цифр и может содержать цифры, пробелы, тире, пузатые скобки и может начинаться с +"
             required
           />
-          Number
         </label>
 
         <button type="submit">Add contact</button>
