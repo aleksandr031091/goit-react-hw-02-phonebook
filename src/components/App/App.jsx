@@ -1,12 +1,11 @@
 import { Component } from "react";
-// import shortid from "shortid";
+import shortid from "shortid";
+import scss from "App.module.scss";
 
-import ContactForm from "./ContactForm";
-import ContactList from "./ContactList";
-import Filter from "./Filter";
-
-import Section from "./Section";
-import Container from "./Container";
+import ContactForm from "../ContactForm";
+import ContactList from "../ContactList";
+import Filter from "../Filter";
+import Container from "../Container";
 
 class App extends Component {
   state = {
@@ -21,7 +20,7 @@ class App extends Component {
 
   addContact = ({ name, number }) => {
     const contact = {
-      // id: shortid.generate(),
+      id: shortid.generate(),
       name,
       number,
     };
@@ -72,14 +71,14 @@ class App extends Component {
 
     return (
       <>
-        <Section title="Phonebook">
-          <Container>
-            <ContactForm onSubmit={this.addContact} />
+        <div className={scss.phoneBookBox}>
+          <h1>Phonebook</h1>
+          <ContactForm onSubmit={this.addContact} />
 
-            {visibleContacts.length > 1 && (
-              <Filter value={filter} onChangeFilter={this.changeFilter} />
-            )}
-          </Container>
+          {visibleContacts.length > 1 && (
+            <Filter value={filter} onChangeFilter={this.changeFilter} />
+          )}
+
           {visibleContacts.length > 0 && (
             <Container title="Contacts">
               <ContactList
@@ -88,7 +87,7 @@ class App extends Component {
               />
             </Container>
           )}
-        </Section>
+        </div>
       </>
     );
   }
