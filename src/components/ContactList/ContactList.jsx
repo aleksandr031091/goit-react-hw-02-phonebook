@@ -1,12 +1,14 @@
 import PropTypes from "prop-types";
+import scss from "./ContactList.module.scss";
 
 const ContactList = ({ contacts, onRemoveContact }) => (
-  <ul>
+  <ul className={scss.list}>
     {contacts.map((contact) => (
-      <li key={contact.id}>
-        {contact.name + ":" + contact.number}
+      <li className={scss.item} key={contact.id}>
+        {contact.name + " : " + contact.number}
         {
           <button
+            className={scss.button}
             type="button"
             name="delete"
             onClick={() => onRemoveContact(contact.id)}

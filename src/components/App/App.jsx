@@ -1,6 +1,7 @@
 import { Component } from "react";
 import shortid from "shortid";
-import scss from "App.module.scss";
+
+import scss from "./App.module.scss";
 
 import ContactForm from "../ContactForm";
 import ContactList from "../ContactList";
@@ -72,7 +73,7 @@ class App extends Component {
     return (
       <>
         <div className={scss.phoneBookBox}>
-          <h1>Phonebook</h1>
+          <h1 className={scss.title}>Phonebook</h1>
           <ContactForm onSubmit={this.addContact} />
 
           {visibleContacts.length > 1 && (

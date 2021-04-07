@@ -4,7 +4,7 @@ import scss from "./Container.module.scss";
 const Container = ({ title, children }) => {
   return (
     <div className={scss.container}>
-      <h2>{title}</h2>
+      <h2 className={scss.title}>{title}</h2>
       {children}
     </div>
   );
